@@ -30,6 +30,8 @@ namespace WinterProjectAPIV5.Controllers
                             expense.Amount,
                             ExpenseName = expense.Name,
                             ExpenseDescription = expense.Description,
+                            expense.DatePaid,
+                            expense.ReceiptPicture,
                             usergroup.UserId,
                             usergroup.GroupId,
                             sharegroup.Name,
@@ -58,6 +60,8 @@ namespace WinterProjectAPIV5.Controllers
                     Email = record.Email,
                     ExpenseName = record.ExpenseName,
                     ExpenseDescription = record.ExpenseDescription,
+                    DatePaid = record.DatePaid,
+                    ReceiptPicture = record.ReceiptPicture,
                     GroupDescription = record.GroupDescription
                 });
             }
@@ -86,6 +90,8 @@ namespace WinterProjectAPIV5.Controllers
                             expense.Amount,
                             ExpenseName = expense.Name,
                             ExpenseDescription = expense.Description,
+                            expense.DatePaid,
+                            expense.ReceiptPicture,
                             usergroup.UserId,
                             usergroup.GroupId,
                             sharegroup.Name,
@@ -114,6 +120,8 @@ namespace WinterProjectAPIV5.Controllers
                     Email = record.Email,
                     ExpenseName = record.ExpenseName,
                     ExpenseDescription = record.ExpenseDescription,
+                    DatePaid = record.DatePaid,
+                    ReceiptPicture = record.ReceiptPicture,
                     GroupDescription = record.GroupDescription
                 });
             }
@@ -160,7 +168,9 @@ namespace WinterProjectAPIV5.Controllers
                 UserGroupId = UserGroupID,
                 Amount = request.Amount,
                 Name = request.Name,
-                Description = request.Description
+                Description = request.Description,
+                DatePaid = request.DatePaid,
+                ReceiptPicture = request.ReceiptPicture
             };
 
             context.Expenses.Add(ExpenseToInsert);
@@ -217,6 +227,8 @@ namespace WinterProjectAPIV5.Controllers
                                           expense.Amount,
                                           ExpenseName = expense.Name,
                                           ExpenseDescription = expense.Description,
+                                          expense.DatePaid,
+                                          expense.ReceiptPicture,
                                           SelectedUserID = user.UserId,
                                           user.UserName,
                                           user.FirstName,
@@ -246,6 +258,8 @@ namespace WinterProjectAPIV5.Controllers
                     Email = expense.Email,
                     ExpenseName = expense.ExpenseName,
                     ExpenseDescription = expense.ExpenseDescription,
+                    DatePaid = expense.DatePaid,
+                    ReceiptPicture = expense.ReceiptPicture,
                     GroupDescription = expense.GroupDescription
                 };
                 ListOfPersonalExpenses.Add(PersonalExpense);
@@ -291,6 +305,8 @@ namespace WinterProjectAPIV5.Controllers
             RecordToUpdate.Amount = request.Amount;
             RecordToUpdate.Name = request.Name;
             RecordToUpdate.Description = request.Description;
+            RecordToUpdate.DatePaid = request.DatePaid;
+            RecordToUpdate.ReceiptPicture = request.ReceiptPicture;
             await context.SaveChangesAsync();
 
             //Get the userID for the usergroupid

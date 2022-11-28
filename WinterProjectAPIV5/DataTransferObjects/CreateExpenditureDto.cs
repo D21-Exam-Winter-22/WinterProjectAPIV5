@@ -9,5 +9,9 @@
         public string? Name { get; set; }
 
         public string? Description { get; set; }
+        
+        public DateTime? DatePaid { get; set; }
+
+        public string? ReceiptPicture { get; set; }
     }
 }

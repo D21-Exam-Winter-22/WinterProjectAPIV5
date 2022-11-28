@@ -18,5 +18,9 @@
         public string? ExpenseDescription { get; set; }
 
         public string? GroupDescription { get; set; }
+        
+        public DateTime? DatePaid { get; set; }
+
+        public string? ReceiptPicture { get; set; }
     }
 }

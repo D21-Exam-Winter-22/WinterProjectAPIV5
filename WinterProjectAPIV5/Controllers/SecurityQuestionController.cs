@@ -14,5 +14,18 @@ namespace WinterProjectAPIV5.Controllers
         {
             this.context = context;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<string>> InserNewSecurityQuestion(string question)
+        {
+            SecurityQuestion QuestionToInsert = new SecurityQuestion
+            {
+                Question = question
+                
+            };
+            await context.AddAsync(QuestionToInsert);
+            await context.SaveChangesAsync();
+            return Ok("Inserted");
+        }
     }
 }

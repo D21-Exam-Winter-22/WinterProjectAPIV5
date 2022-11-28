@@ -47,7 +47,10 @@ namespace WinterProjectAPIV5.Controllers
                 Name = request.Name,
                 Description = request.Description,
                 HasConcluded = request.HasConcluded,
-                IsPublic = request.IsPublic
+                IsPublic = request.IsPublic,
+                CreationDate = request.CreationDate,
+                ConclusionDate = request.ConclusionDate,
+                LastActiveDate = DateTime.Now
             };
             //Insert the Group
             await context.ShareGroups.AddAsync(GroupToInsert);
@@ -110,9 +113,14 @@ namespace WinterProjectAPIV5.Controllers
             //Find the record
             ShareGroup RecordToChange = context.ShareGroups.Find(request.GroupID);
 
-            RecordToChange.Name = request.NewGroupName;
-            RecordToChange.Description = request.NewGroupDescription;
-            RecordToChange.IsPublic = request.IsPublic;
+            {
+                RecordToChange.Name = request.NewGroupName;
+                RecordToChange.Description = request.NewGroupDescription;
+                RecordToChange.IsPublic = request.IsPublic;
+                RecordToChange.CreationDate = request.CreationDate;
+                RecordToChange.ConclusionDate = request.ConclusionDate;
+                RecordToChange.LastActiveDate = request.LastActiveDate;
+            }
 
             //Save the changes
             await context.SaveChangesAsync();

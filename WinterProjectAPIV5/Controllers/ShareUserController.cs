@@ -59,7 +59,12 @@ namespace WinterProjectAPIV5.Controllers
                 LastName = request.LastName,
                 Email = request.Email,
                 Password = request.Password,
-                IsAdmin = request.IsAdmin
+                IsAdmin = request.IsAdmin,
+                Address = request.Address,
+                QuestionId = request.QuestionID,
+                SecurityAnswer = request.SecurityAnswer,
+                IsDisabled = request.IsDisabled,
+                IsBlacklisted = request.IsBlacklisted
             };
 
             //Insert the user
@@ -82,6 +87,11 @@ namespace WinterProjectAPIV5.Controllers
                 RecordToChange.LastName = request.LastName;
                 RecordToChange.Email = request.Email;
                 RecordToChange.Password = request.Password;
+                RecordToChange.Address = request.Address;
+                RecordToChange.QuestionId = request.QuestionId;
+                RecordToChange.SecurityAnswer = request.SecurityAnswer;
+                RecordToChange.IsDisabled = request.IsDisabled;
+                RecordToChange.IsBlacklisted = request.IsBlacklisted;
             }
             else
             {
@@ -112,7 +122,12 @@ namespace WinterProjectAPIV5.Controllers
                 LastName = SingleUser.LastName,
                 Email = SingleUser.Email,
                 IsAdmin = SingleUser.IsAdmin,
-                Password = SingleUser.Password
+                Password = SingleUser.Password,
+                Address = SingleUser.Address,
+                QuestionID = SingleUser.QuestionId,
+                SecurityAnswer = SingleUser.SecurityAnswer,
+                IsDisabled = SingleUser.IsDisabled,
+                IsBlacklisted = SingleUser.IsBlacklisted
             };
 
             return Ok(User);
@@ -123,6 +138,16 @@ namespace WinterProjectAPIV5.Controllers
         {
             List<ShareUser> SearchedUsers = await context.ShareUsers.Where(user => user.UserName.Contains(SearchString) || user.FirstName.Contains(SearchString) || user.LastName.Contains(SearchString)).ToListAsync();
             return Ok(SearchedUsers);
+        }
+
+        [HttpGet("GetAllUsersGroups/{UserID}")]
+        public async Task<ActionResult<List<ShareGroup>>> GetAllUsersGroups(int UserID)
+        {
+            List<UserGroup> ListOfUsersGroups = await context.UserGroups
+                    .Include(entry => entry.Group)
+                    .Where(usergroup => usergroup.UserId == UserID).ToListAsync();
+
+            return Ok(ListOfUsersGroups);
         }
 
 

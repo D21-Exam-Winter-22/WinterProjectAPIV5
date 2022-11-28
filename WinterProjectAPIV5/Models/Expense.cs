@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WinterProjectAPIV5.Models;
 
@@ -19,5 +20,6 @@ public partial class Expense
 
     public string? ReceiptPicture { get; set; }
 
+   
     public virtual UserGroup? UserGroup { get; set; }
 }

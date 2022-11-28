@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WinterProjectAPIV5.Models;
 
@@ -31,7 +32,9 @@ public partial class ShareUser
 
     public bool? IsBlacklisted { get; set; }
 
+    
     public virtual SecurityQuestion? Question { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<UserGroup> UserGroups { get; } = new List<UserGroup>();
 }

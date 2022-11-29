@@ -68,6 +68,7 @@ namespace WinterProjectAPIV5.Controllers
                 RecordToUpdate.Amount = request.Amount;
                 RecordToUpdate.DatePaid = request.DatePaid;
             }
+            await context.SaveChangesAsync();
             //Find the group
             UserGroup TheUserGroup = await context.UserGroups.FindAsync(request.UserGroupId);
             ShareGroup TheGroup = await context.ShareGroups.FindAsync(TheUserGroup.GroupId);
@@ -178,6 +179,7 @@ namespace WinterProjectAPIV5.Controllers
         public async Task<ActionResult<string>> DeleteInPaymentOnTransactionID(int TransactionID)
         {
             await context.InPayments.Where(entry => entry.TransactionId == TransactionID).ExecuteDeleteAsync();
+            await context.SaveChangesAsync();
             
             //Find the usergroup on this transactionID
             InPayment TheInPayment = await context.InPayments.FindAsync(TransactionID);

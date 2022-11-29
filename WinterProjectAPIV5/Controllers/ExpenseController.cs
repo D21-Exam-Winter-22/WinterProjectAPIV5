@@ -173,10 +173,11 @@ namespace WinterProjectAPIV5.Controllers
                 ReceiptPicture = request.ReceiptPicture                
             };
             
+            
             //Update the last active attribute of this group
             ShareGroup TheGroup = await context.ShareGroups.FindAsync(request.GroupID);
             TheGroup.LastActiveDate = DateTime.Now;
-
+            await context.SaveChangesAsync();
             context.Expenses.Add(ExpenseToInsert);
             await context.SaveChangesAsync();
 
@@ -210,7 +211,7 @@ namespace WinterProjectAPIV5.Controllers
             //Update group activity date
             ShareGroup TheGroup = await context.ShareGroups.FindAsync(GroupID);
             TheGroup.LastActiveDate = DateTime.Now;
-
+            await context.SaveChangesAsync();
             //Delete the expenseID from the table
             await context.Expenses.Where(x => x.ExpenseId == ExpenseID).ExecuteDeleteAsync();
             await context.SaveChangesAsync();
@@ -317,6 +318,7 @@ namespace WinterProjectAPIV5.Controllers
                 RecordToUpdate.DatePaid = request.DatePaid;
                 RecordToUpdate.ReceiptPicture = request.ReceiptPicture;
             }
+            await context.SaveChangesAsync();
             
             //Find the Relevant group and change it's Last active date
             UserGroup UserGroupsExpense = await context.UserGroups.FindAsync(UserGroupID);

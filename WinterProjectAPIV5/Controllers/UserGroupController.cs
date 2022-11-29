@@ -81,6 +81,11 @@ namespace WinterProjectAPIV5.Controllers
                 GroupId = request.GroupID,
                 IsOwner = false
             };
+            
+            //Update Last active date of group
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(request.GroupID);
+            TheGroup.LastActiveDate = DateTime.Now;
+            await context.SaveChangesAsync();
 
             context.UserGroups.Add(UserGroupToInsert);
             await context.SaveChangesAsync();
@@ -223,6 +228,11 @@ namespace WinterProjectAPIV5.Controllers
                     .ExecuteDeleteAsync();
                 await context.SaveChangesAsync();
             }
+            
+            //Update group's last active date
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(request.GroupID);
+            TheGroup.LastActiveDate = DateTime.Now;
+            await context.SaveChangesAsync();
 
             //Have to delete all entries from UserGroup where the userID and GroupID match
             context.UserGroups.RemoveRange(context.UserGroups.Where(usergroup => usergroup.UserId == request.UserID && usergroup.GroupId == request.GroupID));

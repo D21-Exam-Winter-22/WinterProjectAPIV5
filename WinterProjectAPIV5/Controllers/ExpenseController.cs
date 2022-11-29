@@ -67,7 +67,7 @@ namespace WinterProjectAPIV5.Controllers
             }
             if (QueriedList.Count == 0)
             {
-                return NotFound(QueriedList);
+                return Ok(QueriedList);
             }
             else
             {
@@ -169,9 +169,13 @@ namespace WinterProjectAPIV5.Controllers
                 Amount = request.Amount,
                 Name = request.Name,
                 Description = request.Description,
-                DatePaid = request.DatePaid,
-                ReceiptPicture = request.ReceiptPicture
+                DatePaid = DateTime.Now,
+                ReceiptPicture = request.ReceiptPicture                
             };
+            
+            //Update the last active attribute of this group
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(request.GroupID);
+            TheGroup.LastActiveDate = DateTime.Now;
 
             context.Expenses.Add(ExpenseToInsert);
             await context.SaveChangesAsync();
@@ -202,6 +206,10 @@ namespace WinterProjectAPIV5.Controllers
                 UserID = record.UserId;
                 GroupID = record.GroupId;
             }
+            
+            //Update group activity date
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(GroupID);
+            TheGroup.LastActiveDate = DateTime.Now;
 
             //Delete the expenseID from the table
             await context.Expenses.Where(x => x.ExpenseId == ExpenseID).ExecuteDeleteAsync();
@@ -302,11 +310,19 @@ namespace WinterProjectAPIV5.Controllers
             Expense RecordToUpdate = ListOfRecords.First();
 
             //Update them
-            RecordToUpdate.Amount = request.Amount;
-            RecordToUpdate.Name = request.Name;
-            RecordToUpdate.Description = request.Description;
-            RecordToUpdate.DatePaid = request.DatePaid;
-            RecordToUpdate.ReceiptPicture = request.ReceiptPicture;
+            {
+                RecordToUpdate.Amount = request.Amount;
+                RecordToUpdate.Name = request.Name;
+                RecordToUpdate.Description = request.Description;
+                RecordToUpdate.DatePaid = request.DatePaid;
+                RecordToUpdate.ReceiptPicture = request.ReceiptPicture;
+            }
+            
+            //Find the Relevant group and change it's Last active date
+            UserGroup UserGroupsExpense = await context.UserGroups.FindAsync(UserGroupID);
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(UserGroupsExpense.GroupId);
+            TheGroup.LastActiveDate = DateTime.Now;
+            
             await context.SaveChangesAsync();
 
             //Get the userID for the usergroupid

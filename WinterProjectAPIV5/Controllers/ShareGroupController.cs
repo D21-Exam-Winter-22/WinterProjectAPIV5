@@ -48,7 +48,7 @@ namespace WinterProjectAPIV5.Controllers
                 Description = request.Description,
                 HasConcluded = request.HasConcluded,
                 IsPublic = request.IsPublic,
-                CreationDate = request.CreationDate,
+                CreationDate = DateTime.Now,
                 ConclusionDate = request.ConclusionDate,
                 LastActiveDate = DateTime.Now
             };
@@ -80,6 +80,7 @@ namespace WinterProjectAPIV5.Controllers
             if (GroupToEnd != null)
             {
                 GroupToEnd.HasConcluded = true;
+                GroupToEnd.ConclusionDate = DateTime.Now;
             }
             else
             {
@@ -117,9 +118,9 @@ namespace WinterProjectAPIV5.Controllers
                 RecordToChange.Name = request.NewGroupName;
                 RecordToChange.Description = request.NewGroupDescription;
                 RecordToChange.IsPublic = request.IsPublic;
-                RecordToChange.CreationDate = request.CreationDate;
+                //RecordToChange.CreationDate = request.CreationDate;
                 RecordToChange.ConclusionDate = request.ConclusionDate;
-                RecordToChange.LastActiveDate = request.LastActiveDate;
+                RecordToChange.LastActiveDate = DateTime.Now;
             }
 
             //Save the changes
@@ -144,6 +145,7 @@ namespace WinterProjectAPIV5.Controllers
                 return NotFound("Invalid GroupID");
             }
             TheGroup.IsPublic = !TheGroup.IsPublic;
+            TheGroup.LastActiveDate = DateTime.Now;
             await context.SaveChangesAsync();
             return Ok("Changed Visibility");
         }

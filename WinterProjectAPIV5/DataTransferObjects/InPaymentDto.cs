@@ -6,5 +6,6 @@
         public int? UserGroupId { get; set; }
 
         public double? Amount { get; set; }
+        public DateTime? DatePaid { get; set; }
     }
 }

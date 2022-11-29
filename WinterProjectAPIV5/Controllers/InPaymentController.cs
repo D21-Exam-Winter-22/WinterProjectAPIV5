@@ -26,7 +26,8 @@ namespace WinterProjectAPIV5.Controllers
             InPayment InPayment = new InPayment
             {
                 UserGroupId = request.UserGroupId,
-                Amount = request.Amount
+                Amount = request.Amount,
+                DatePaid = DateTime.Now
             };
             //Insert it into the DB
             context.InPayments.Add(InPayment);
@@ -46,6 +47,10 @@ namespace WinterProjectAPIV5.Controllers
             {
                 GroupID = (int)record.GroupId;
             }
+            //Update the group's Last active date
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(GroupID);
+            TheGroup.LastActiveDate = DateTime.Now;
+            await context.SaveChangesAsync();
             //Using the GroupID, query for all expenditures in the group
 
             return Ok("Paid into pool");
@@ -61,7 +66,13 @@ namespace WinterProjectAPIV5.Controllers
             {
                 RecordToUpdate.UserGroupId = request.UserGroupId;
                 RecordToUpdate.Amount = request.Amount;
+                RecordToUpdate.DatePaid = request.DatePaid;
             }
+            //Find the group
+            UserGroup TheUserGroup = await context.UserGroups.FindAsync(request.UserGroupId);
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(TheUserGroup.GroupId);
+            TheGroup.LastActiveDate = DateTime.Now;
+
             await context.SaveChangesAsync();
             return Ok("Payment Edited");
         }
@@ -167,6 +178,15 @@ namespace WinterProjectAPIV5.Controllers
         public async Task<ActionResult<string>> DeleteInPaymentOnTransactionID(int TransactionID)
         {
             await context.InPayments.Where(entry => entry.TransactionId == TransactionID).ExecuteDeleteAsync();
+            
+            //Find the usergroup on this transactionID
+            InPayment TheInPayment = await context.InPayments.FindAsync(TransactionID);
+            UserGroup TheUserGroup = await context.UserGroups.FindAsync(TheInPayment.UserGroupId);
+            ShareGroup TheGroup = await context.ShareGroups.FindAsync(TheUserGroup.GroupId);
+            
+            //Update the group's last active date
+            TheGroup.LastActiveDate = DateTime.Now;
+            
             await context.SaveChangesAsync();
             return Ok("Deleted");
         }

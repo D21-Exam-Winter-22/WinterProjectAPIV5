@@ -47,7 +47,19 @@ namespace WinterProjectAPIV5.Controllers
             List<ShareUser> ExistingUsers = await context.ShareUsers.Where(User => User.UserName == request.UserName).ToListAsync();
             if (ExistingUsers.Count > 0)
             {
-                return Conflict();
+                return Ok(string.Format("User with username: {0}, already exists", request.UserName));
+            }
+            
+            //Check if the user with that email exists in the system and is blacklisted
+            //Get the account
+            List<ShareUser> ListOfUsers = await context.ShareUsers.Where(user => user.Email == request.Email).ToListAsync();
+
+            foreach (ShareUser user in ListOfUsers)
+            {
+                if ((bool)user.IsBlacklisted)
+                {
+                    return Ok(string.Format("{0} has been blacklisted", request.Email));
+                }
             }
 
             //Create the user to insert
@@ -63,8 +75,8 @@ namespace WinterProjectAPIV5.Controllers
                 Address = request.Address,
                 QuestionId = request.QuestionID,
                 SecurityAnswer = request.SecurityAnswer,
-                IsDisabled = request.IsDisabled,
-                IsBlacklisted = request.IsBlacklisted
+                IsDisabled = false,
+                IsBlacklisted = false
             };
 
             //Insert the user
@@ -148,6 +160,44 @@ namespace WinterProjectAPIV5.Controllers
                     .Where(usergroup => usergroup.UserId == UserID).ToListAsync();
 
             return Ok(ListOfUsersGroups);
+        }
+
+        [HttpPut("DisableAccountOnID/{UserID}")]
+        public async Task<ActionResult<string>> DisableAccountOnID(int UserID)
+        {
+            //Get the Account
+            ShareUser account = await context.ShareUsers.FindAsync(UserID);
+
+            if (account == null)
+            {
+                return Ok(string.Format("Account with ID: {0} not found", UserID));
+            }
+            
+            //Edit the account
+            account.IsDisabled = true;
+            await context.SaveChangesAsync();
+            
+            return Ok("Account Disabled");
+        }
+
+        [HttpPut("BlacklistUserOnID/{UserID}")]
+        public async Task<ActionResult<string>> BlacklistUserOnID(int UserID)
+        {
+            //get the account
+            ShareUser account = await context.ShareUsers.FindAsync(UserID);
+
+            if (account == null)
+            {
+                return Ok(string.Format("Account with ID: {0}", UserID));
+            }
+            
+            //Edit the account
+
+            account.IsBlacklisted = true;
+            await context.SaveChangesAsync();
+
+
+            return Ok();
         }
 
 

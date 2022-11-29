@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WinterProjectAPIV5.Models;
 
 namespace WinterProjectAPIV5.Controllers
@@ -13,6 +14,70 @@ namespace WinterProjectAPIV5.Controllers
         public TermsOfServiceController(PaymentApidb2Context context)
         {
             this.context = context;
+        }
+
+        [HttpGet("GetAllTermsOfServices")]
+        public async Task<ActionResult<List<TermsOfService>>> GetAllTermsOfServices()
+        {
+            return Ok(await context.TermsOfServices.ToListAsync());
+        }
+
+        [HttpPost("InsertNewTermsOfService")]
+        public async Task<ActionResult<string>> InsertNewTermsOfService(string NewToSContent)
+        {
+            TermsOfService ToSToInsert = new TermsOfService
+            {
+                CreationDate = DateTime.Now,
+                LastModificationDate = DateTime.Now,
+                Content = NewToSContent
+            };
+
+            await context.AddAsync(ToSToInsert);
+            await context.SaveChangesAsync();
+
+            return Ok("Inserted ToS");
+        }
+
+        [HttpPut("EditATermsOfService")]
+        public async Task<ActionResult<string>> EditTermsOfService(TermsOfService request)
+        {
+            //Get the terms of service to edit
+            TermsOfService TheToS = await context.TermsOfServices.FindAsync(request.ToSid);
+            
+            //If the ToS is not found
+            if (TheToS == null)
+            {
+                return Ok(string.Format("ToS not found on ID: {0}", request.ToSid));
+            }
+            
+            //Edit the ToS
+            {
+                TheToS.LastModificationDate = DateTime.Now;
+                TheToS.Content = request.Content;
+            }
+            
+            //Save the changes
+            await context.SaveChangesAsync();
+            return Ok("ToS successfully edited");
+
+        }
+        
+
+        [HttpDelete("DeleteToSOnID/{TermsOfServiceID}")]
+        public async Task<ActionResult<string>> DeleteToSOnID(int TermsOfServiceID)
+        {
+            //Get the ToS
+            TermsOfService TheToS = await context.TermsOfServices.FindAsync(TermsOfServiceID);
+
+            if (TheToS == null)
+            {
+                return Ok(string.Format("ToS not found on ID: {0}", TermsOfServiceID));
+            }
+
+            context.Remove(TheToS);
+            await context.SaveChangesAsync();
+            
+            return Ok("Terms of service deleted");
         }
     }
 }

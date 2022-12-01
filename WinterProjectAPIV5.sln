@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinterProjectAPIV5", "WinterProjectAPIV5\WinterProjectAPIV5.csproj", "{351FC94C-DB89-4B5B-BA88-59B2A090F8A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject", "XUnitTestProject\XUnitTestProject.csproj", "{458A8D67-0CB7-4AC7-B281-360233E66206}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{351FC94C-DB89-4B5B-BA88-59B2A090F8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{351FC94C-DB89-4B5B-BA88-59B2A090F8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{351FC94C-DB89-4B5B-BA88-59B2A090F8A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{458A8D67-0CB7-4AC7-B281-360233E66206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458A8D67-0CB7-4AC7-B281-360233E66206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458A8D67-0CB7-4AC7-B281-360233E66206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458A8D67-0CB7-4AC7-B281-360233E66206}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

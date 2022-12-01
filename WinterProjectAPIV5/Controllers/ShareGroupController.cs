@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WinterProjectAPIV5.DataTransferObjects;
+using WinterProjectAPIV5.Functions;
 using WinterProjectAPIV5.Models;
 
 namespace WinterProjectAPIV5.Controllers
@@ -155,6 +156,27 @@ namespace WinterProjectAPIV5.Controllers
         {
             List<ShareGroup> SearchedGroups = await context.ShareGroups.Where(group => group.Name.Contains(SearchString) || group.Description.Contains(SearchString)).ToListAsync();
             return Ok(SearchedGroups);
+        }
+
+        [HttpPut("ArchiveDormantGroups")]
+        public async Task<ActionResult<string>> ArchiveDormantGroups()
+        {
+            //Initialize a counter for number of groups set to dormant
+            int DormantSetterCount = 0;
+            
+            //Get The list of groups
+            List<ShareGroup> ListOfAllGroups = await context.ShareGroups.ToListAsync();
+
+            List<ShareGroup> ListOfInactiveGroups =  InactiveTimeCalculator.GetListOfDormantShareGroups(ListOfAllGroups);
+
+            foreach (ShareGroup Group in ListOfInactiveGroups)
+            {
+                Group.HasConcluded = true;
+                await context.SaveChangesAsync();
+                DormantSetterCount++;
+            }
+
+            return Ok(string.Format("Number of groups set to dormant: {0}", DormantSetterCount));
         }
 
     }

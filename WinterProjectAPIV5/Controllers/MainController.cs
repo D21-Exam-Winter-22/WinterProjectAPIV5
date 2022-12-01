@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Buffers.Text;
+using System.Diagnostics;
+using System.Timers;
 using WinterProjectAPIV5.DataTransferObjects;
+using WinterProjectAPIV5.Functions;
 using WinterProjectAPIV5.Models;
 
 
@@ -18,7 +21,10 @@ namespace WinterProjectAPIV5.Controllers
         public MainController(PaymentApidb2Context context)
         {
             this.context = context;
+            
         }
+
+        
 
         [HttpGet("IsOnline")]
         public bool ApplicationIsOnline()
@@ -49,28 +55,27 @@ namespace WinterProjectAPIV5.Controllers
 
             return Ok(EncodedValue);
         }
-        
-        
 
-        [HttpGet("GetTokenOnUserID/{UserID}")]
-        public async Task<ActionResult<string>> GetTokenOnUserID(int UserID)
+        [HttpPost("Logout/{UserID}")]
+        public async Task<ActionResult<string>> LogOutRemoveToken(int UserID)
         {
             if (TokenDictionary.ContainsKey(UserID))
             {
-                return Ok(TokenDictionary[UserID]);
+                TokenDictionary.Remove(UserID);
+                return Ok("Successfully Logged out");
             }
             else
             {
-                return NotFound("Not Present in the Dictionary");
+                return Ok("Token not found");
             }
         }
 
-        [HttpGet("TestGetPDFFile")]
-        public async Task<ActionResult<Byte[]>> TestGetPDFFile()
+        [HttpGet("GetUserIDOnToken/{token}")]
+        public async Task<ActionResult<int>> GetUserIDOnToken(string token)
         {
-            string FilePath = "C:\\Users\\allan\\OneDrive\\Desktop\\Allan's Resume.pdf";
-            byte[] PDFBytes = System.IO.File.ReadAllBytes(FilePath);
-            return PDFBytes;
+            int TheKey = TokenDictionary.FirstOrDefault(x => x.Value == token).Key;
+            return Ok(TheKey);
         }
+
     }
 }

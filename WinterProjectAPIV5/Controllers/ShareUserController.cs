@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WinterProjectAPIV5.DataTransferObjects;
+using WinterProjectAPIV5.Functions;
 using WinterProjectAPIV5.Models;
 
 namespace WinterProjectAPIV5.Controllers
@@ -196,9 +197,33 @@ namespace WinterProjectAPIV5.Controllers
             account.IsBlacklisted = true;
             await context.SaveChangesAsync();
 
-
             return Ok();
         }
+
+        [HttpPut("ResetAccountPassword/{UserID}")]
+        public async Task<ActionResult<string>> ResetAccountPassword(int UserID)
+        {
+            //Identify the account
+            ShareUser TheAccount = await context.ShareUsers.FindAsync(UserID);
+
+            if (TheAccount == null)
+            {
+                return NotFound(string.Format("Account with the UserID: {0} does not exist", UserID));
+            }
+            
+            //Change the password
+            string password = GenerateRandomString.CreateString(15);
+            
+            //Save it in the DB
+            TheAccount.Password = password;
+            await context.SaveChangesAsync();
+
+            return Ok(password);
+
+        }
+        
+        
+        
 
 
     }

@@ -1,0 +1,58 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0d3429d2_002D5022_002D4d32_002D979e_002D81fc55c7d3f8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;TestAncestor&gt;&#xD;
+        &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.TokenEncodeTest&lt;/TestId&gt;&#xD;
+      &lt;/TestAncestor&gt;&#xD;
+      &lt;Project Location="C:\Users\allan\source\repos\WinterProjectAPIV5\XUnitTestProject" Presentation="&amp;lt;XUnitTestProject&amp;gt;" /&gt;&#xD;
+      &lt;Namespace&gt;XUnitTestProject&lt;/Namespace&gt;&#xD;
+    &lt;/And&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest1&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest2&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest3&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.CalculateDormantDaysTest1&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.CalculateDormantDaysTest2&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.CalculateDormantDaysTest3&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.GetListOfDormantShareGroupsTest2&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3eec2dc9_002De91d_002D4d61_002D875e_002Db4baea584f03/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b763aa99_002D9f36_002D4d15_002Da17c_002Dd39be5c2fe14/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d8483f07_002D2f27_002D4648_002D819e_002D69383426f90b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;XUnitTestProject&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\allan\source\repos\WinterProjectAPIV5\XUnitTestProject" Presentation="&amp;lt;XUnitTestProject&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dcbf9fbc_002Db00b_002D4eac_002Da516_002Dc0b9e7f1eac7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from Solution #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=df467080_002Da5d9_002D449b_002D9bbd_002Ddc0117e15c27/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;TestAncestor&gt;&#xD;
+        &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.TokenEncodeTest&lt;/TestId&gt;&#xD;
+      &lt;/TestAncestor&gt;&#xD;
+      &lt;Project Location="C:\Users\allan\source\repos\WinterProjectAPIV5\XUnitTestProject" Presentation="&amp;lt;XUnitTestProject&amp;gt;" /&gt;&#xD;
+      &lt;Namespace&gt;XUnitTestProject&lt;/Namespace&gt;&#xD;
+    &lt;/And&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.GetListOfDormantShareGroupsTest1&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.GetListOfDormantShareGroupsTest2&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest1&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest2&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.RandomStringGeneratorTest3&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.CalculateDormantDaysTest1&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.CalculateDormantDaysTest2&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.CalculateDormantDaysTest3&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.GetListOfDormantShareGroupsTest3&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.GetListOfDormantShareGroupsTest4&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::458A8D67-0CB7-4AC7-B281-360233E66206::net6.0::XUnitTestProject.UnitTest1.GetListOfDormantShareGroupsTest5&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

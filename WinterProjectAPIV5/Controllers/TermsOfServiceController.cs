@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Timers;
 using WinterProjectAPIV5.Models;
+using Timer = System.Timers.Timer;
 
 namespace WinterProjectAPIV5.Controllers
 {
@@ -14,6 +16,17 @@ namespace WinterProjectAPIV5.Controllers
         public TermsOfServiceController(PaymentApidb2Context context)
         {
             this.context = context;
+
+            Timer t = new Timer(2);
+            t.AutoReset = true;
+            t.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            //t.Start();
+
+        }
+
+        private async void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            InsertNewTermsOfService("Timer test");
         }
 
         [HttpGet("GetAllTermsOfServices")]

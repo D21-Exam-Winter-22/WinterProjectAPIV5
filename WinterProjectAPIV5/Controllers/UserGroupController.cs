@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WinterProjectAPIV5.DataTransferObjects;
+using WinterProjectAPIV5.Functions;
 using WinterProjectAPIV5.Models;
+using WinterProjectAPIV5.PDFGenerator;
 
 namespace WinterProjectAPIV5.Controllers
 {
@@ -313,6 +315,21 @@ namespace WinterProjectAPIV5.Controllers
             await context.SaveChangesAsync();
 
             return Ok("Transferred Ownership");
+        }
+
+        [HttpGet("GetPDFSummaryOnGroupID/{GroupID}")]
+        public async Task<ActionResult<Byte[]>> GetPDFSummaryOnGroupID(int GroupID)
+        {
+            List<MoneyOwedByUserGroupDto> ListOfAllShares = CalculateUserGroupSharesSync.CalculateShares(context, GroupID);
+
+            PDFCreator PDFBuilder = new PDFCreator(ListOfAllShares, context);
+            string FileName = PDFBuilder.CreatePDF();
+            
+            string FilePath = FileName;
+            byte[] PDFBytes = System.IO.File.ReadAllBytes(FilePath);
+            System.IO.File.Delete(FilePath);
+            
+            return PDFBytes;
         }
     }
 }

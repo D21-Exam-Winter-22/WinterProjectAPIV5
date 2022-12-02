@@ -154,13 +154,42 @@ namespace WinterProjectAPIV5.Controllers
         }
 
         [HttpGet("GetAllUsersGroups/{UserID}")]
-        public async Task<ActionResult<List<ShareGroup>>> GetAllUsersGroups(int UserID)
+        public async Task<ActionResult<List<CustomUsersGroupDTO>>> GetAllUsersGroups(int UserID)
         {
-            List<UserGroup> ListOfUsersGroups = await context.UserGroups
-                    .Include(entry => entry.Group)
-                    .Where(usergroup => usergroup.UserId == UserID).ToListAsync();
+            //List<UserGroup> ListOfUsersGroups = await context.UserGroups.Include(entry => entry.Group).Include(entry => entry.User).Where(usergroup => usergroup.UserId == UserID).ToListAsync();
 
-            return Ok(ListOfUsersGroups);
+            var query = from sharegroup in context.ShareGroups
+                join usergroup in context.UserGroups on sharegroup.GroupId equals usergroup.GroupId
+                where usergroup.UserId == UserID
+                select new
+                {
+                    sharegroup.GroupId,
+                    sharegroup.Name,
+                    sharegroup.Description,
+                    sharegroup.HasConcluded,
+                    sharegroup.IsPublic,
+                    sharegroup.CreationDate,
+                    sharegroup.ConclusionDate,
+                    sharegroup.LastActiveDate
+                };
+
+            List<CustomUsersGroupDTO> ListOfusersGroups = new List<CustomUsersGroupDTO>();
+            foreach (var entry in query)
+            {
+                ListOfusersGroups.Add(new CustomUsersGroupDTO
+                {
+                    GroupID = entry.GroupId,
+                    Name = entry.Name,
+                    Description = entry.Description,
+                    HasConcluded = entry.HasConcluded,
+                    IsPublic = entry.IsPublic,
+                    CreationDate = entry.CreationDate,
+                    ConclusionDate = entry.ConclusionDate,
+                    LastActiveDate = entry.LastActiveDate
+                });
+            }
+
+            return Ok(ListOfusersGroups);
         }
 
         [HttpPut("DisableAccountOnID/{UserID}")]

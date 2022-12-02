@@ -47,7 +47,7 @@ namespace WinterProjectAPIV5.Controllers
             {
                 Name = request.Name,
                 Description = request.Description,
-                HasConcluded = request.HasConcluded,
+                HasConcluded = false,
                 IsPublic = request.IsPublic,
                 CreationDate = DateTime.Now,
                 ConclusionDate = request.ConclusionDate,

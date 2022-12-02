@@ -4,6 +4,8 @@ using WinterProjectAPIV5.Controllers;
 using WinterProjectAPIV5.Models;
 using System.Threading;
 using Microsoft.AspNetCore.Hosting.Server;
+using WinterProjectAPIV5.PDFGenerator;
+
 
 public class Program
 {
@@ -18,10 +20,7 @@ public class Program
         timer.Elapsed += ( sender, e ) => HandleTimer();
         timer.Start();
 
-        //Generate a test PDF
-        
-
-        // Add services to the container.
+       // Add services to the container.
 
         builder.Services.AddControllers();
         builder.Services.AddDbContext<PaymentApidb2Context>(options =>

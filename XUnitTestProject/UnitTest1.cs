@@ -12,7 +12,6 @@ public class UnitTest1
     {
         string StringToEncode = "UsernamePassword";
 
-
         string ExpectedEncoding = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(StringToEncode));
 
         string ActualEncoding = Base64.Encode(StringToEncode);

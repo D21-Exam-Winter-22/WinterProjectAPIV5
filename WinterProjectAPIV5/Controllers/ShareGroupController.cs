@@ -175,7 +175,7 @@ namespace WinterProjectAPIV5.Controllers
                 await context.SaveChangesAsync();
                 DormantSetterCount++;
             }
-
+            
             return Ok(string.Format("Number of groups set to dormant: {0}", DormantSetterCount));
         }
 

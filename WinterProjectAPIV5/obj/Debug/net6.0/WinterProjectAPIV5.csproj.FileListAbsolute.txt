@@ -86,3 +86,5 @@ C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Debug\net6
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Debug\net6.0\WinterProjectAPIV5.pdb
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Debug\net6.0\WinterProjectAPIV5.genruntimeconfig.cache
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Debug\net6.0\ref\WinterProjectAPIV5.dll
+C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Debug\net6.0\itextsharp.dll

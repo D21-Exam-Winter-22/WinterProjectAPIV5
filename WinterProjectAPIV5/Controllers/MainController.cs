@@ -35,8 +35,9 @@ namespace WinterProjectAPIV5.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<string>> LoginForToken(GetEncodingDto request)
         {
-            string toEncode = request.Username + request.Password;
-            string EncodedValue = Functions.Base64.Encode(toEncode);
+            //string toEncode = request.Username + request.Password;
+            //string EncodedValue = Functions.Base64.Encode(toEncode);
+            string EncodedValue = GenerateRandomString.CreateString(20);
 
             List<ShareUser> UsersList = await context.ShareUsers.Where(user => user.UserName == request.Username && user.Password == request.Password).ToListAsync();
             if (UsersList.Count == 0)

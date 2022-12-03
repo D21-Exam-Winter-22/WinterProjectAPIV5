@@ -342,10 +342,28 @@ namespace WinterProjectAPIV5.Controllers
         }
 
         [HttpGet("SearchExpenses/{SearchString}")]
-        public async Task<ActionResult<List<Expense>>> SearchForExpenses(string SearchString)
+        public async Task<ActionResult<List<GetExpenseDTO>>> SearchForExpenses(string SearchString)
         {
             List<Expense> SearchedExpenses = await context.Expenses.Where(expense => expense.Name.Contains(SearchString) || expense.Description.Contains(SearchString)).ToListAsync();
-            return Ok(SearchedExpenses);
+
+            List<GetExpenseDTO> ListOfSearchedExpenses = new List<GetExpenseDTO>();
+
+            foreach (var SingleExpense in SearchedExpenses)
+            {
+                GetExpenseDTO expense = new GetExpenseDTO
+                {
+                    ExpenseId = SingleExpense.ExpenseId,
+                    UserGroupId = SingleExpense.UserGroupId,
+                    Amount = SingleExpense.Amount,
+                    Name = SingleExpense.Name,
+                    Description = SingleExpense.Description,
+                    DatePaid = SingleExpense.DatePaid,
+                    ReceiptPicture = SingleExpense.ReceiptPicture
+                };
+                ListOfSearchedExpenses.Add(expense);
+            }
+            
+            return Ok(ListOfSearchedExpenses);
         }
     }
 }

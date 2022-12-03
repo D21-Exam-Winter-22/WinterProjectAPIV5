@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WinterProjectAPIV5.DataTransferObjects;
@@ -30,14 +31,56 @@ namespace WinterProjectAPIV5.Controllers
         }
 
         [HttpGet("GetUserByID/{ID}")]
-        public async Task<ActionResult<ShareUser>> GetUserOnID(int ID)
+        public async Task<ActionResult<UserWithQuestionDTO>> GetUserOnID(int ID)
         {
             ShareUser SearchedUser = context.ShareUsers.Find(ID);
             if (SearchedUser == null)
             {
                 return NotFound(SearchedUser);
             }
-            return Ok(SearchedUser);
+
+            var query = from user in context.ShareUsers
+                join securityquestion in context.SecurityQuestions
+                    on user.QuestionId equals securityquestion.QuestionId
+                where user.UserId == ID
+                select new
+                {
+                    user.UserId,
+                    user.UserName,
+                    user.PhoneNumber,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email,
+                    user.Password,
+                    user.IsAdmin,
+                    user.Address,
+                    securityquestion.QuestionId,
+                    user.SecurityAnswer,
+                    user.IsDisabled,
+                    user.IsBlacklisted, 
+                    securityquestion.Question
+                };
+            UserWithQuestionDTO ResultUser = new UserWithQuestionDTO();
+            foreach (var entry in query)
+            {
+                ResultUser.UserId = entry.UserId;
+                ResultUser.UserName = entry.UserName;
+                ResultUser.PhoneNumber = entry.PhoneNumber;
+                ResultUser.FirstName = entry.FirstName;
+                ResultUser.LastName = entry.LastName;
+                ResultUser.Email = entry.Email;
+                ResultUser.Password = entry.Password;
+                ResultUser.IsAdmin =entry.IsAdmin;
+                ResultUser.Address =entry.Address;
+                ResultUser.QuestionId =entry.QuestionId;
+                ResultUser.SecurityAnswer = entry.SecurityAnswer;
+                ResultUser.IsDisabled = entry.IsDisabled;
+                ResultUser.IsBlacklisted = entry.IsBlacklisted;
+                ResultUser.QuestionString = entry.Question;
+                break;
+            }
+
+            return Ok(ResultUser);
         }
 
         [HttpPost("CreateUser")]
@@ -227,6 +270,26 @@ namespace WinterProjectAPIV5.Controllers
             await context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpPut("UnBlacklistUserOnID/{UserID}")]
+        public async Task<ActionResult<string>> UnBlacklistUserOnID(int UserID)
+        {
+            //Find the user
+            ShareUser TheUser = await context.ShareUsers.FindAsync(UserID);
+            
+            //IF the user is not found
+            if (TheUser == null)
+            {
+                return Ok("The user was not found");
+            }
+            
+            //Set the user to false for blacklisted
+            TheUser.IsBlacklisted = false;
+            //Save the changes
+            await context.SaveChangesAsync();
+            
+            return Ok("Un-Blacklisted the user");
         }
 
         [HttpPut("ResetAccountPassword/{UserID}")]

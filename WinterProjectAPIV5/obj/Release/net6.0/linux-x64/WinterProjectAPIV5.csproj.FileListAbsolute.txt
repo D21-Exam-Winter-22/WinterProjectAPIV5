@@ -371,3 +371,5 @@ C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Release\ne
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Release\net6.0\linux-x64\WinterProjectAPIV5.pdb
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Release\net6.0\linux-x64\WinterProjectAPIV5.genruntimeconfig.cache
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\obj\Release\net6.0\linux-x64\ref\WinterProjectAPIV5.dll
+C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\BouncyCastle.Crypto.dll
+C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\itextsharp.dll

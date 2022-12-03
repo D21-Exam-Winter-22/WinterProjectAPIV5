@@ -305,6 +305,8 @@ C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\ne
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\libmscordbi.so
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\Azure.Core.dll
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\Azure.Identity.dll
+C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\BouncyCastle.Crypto.dll
+C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\itextsharp.dll
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\Microsoft.Data.SqlClient.dll
 C:\Users\allan\source\repos\WinterProjectAPIV5\WinterProjectAPIV5\bin\Release\net6.0\linux-x64\publish\Microsoft.EntityFrameworkCore.dll

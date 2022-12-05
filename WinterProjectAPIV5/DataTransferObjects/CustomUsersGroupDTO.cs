@@ -2,7 +2,7 @@
 
 public class CustomUsersGroupDTO
 {
-    public int GroupID { get; set; }
+    public int GroupId { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
     public bool? HasConcluded { get; set; }

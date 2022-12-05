@@ -143,11 +143,13 @@ namespace WinterProjectAPIV5.Controllers
                 RecordToChange.LastName = request.LastName;
                 RecordToChange.Email = request.Email;
                 RecordToChange.Password = request.Password;
+                RecordToChange.IsAdmin = request.IsAdmin;
                 RecordToChange.Address = request.Address;
                 RecordToChange.QuestionId = request.QuestionId;
                 RecordToChange.SecurityAnswer = request.SecurityAnswer;
                 RecordToChange.IsDisabled = request.IsDisabled;
                 RecordToChange.IsBlacklisted = request.IsBlacklisted;
+                
             }
             else
             {
@@ -221,7 +223,7 @@ namespace WinterProjectAPIV5.Controllers
             {
                 ListOfusersGroups.Add(new CustomUsersGroupDTO
                 {
-                    GroupID = entry.GroupId,
+                    GroupId = entry.GroupId,
                     Name = entry.Name,
                     Description = entry.Description,
                     HasConcluded = entry.HasConcluded,
@@ -313,9 +315,36 @@ namespace WinterProjectAPIV5.Controllers
             return Ok(password);
 
         }
-        
-        
-        
+
+        [HttpPut("ChangePassword")]
+        public async Task<ActionResult<string>> ChangePassword(ChangePasswordDTO request)
+        {
+            //Get the account for that userID
+            ShareUser TheAccount = await context.ShareUsers.FindAsync(request.UserID);
+            //Check if it is a valid userid
+            if (TheAccount == null)
+            {
+                return Ok("The Account does not exist");
+            }
+            
+            //Check that the current password matches
+            if (TheAccount.Password != request.CurrentPassword)
+            {
+                return Ok("The Current password is incorrect");
+            }
+            else
+            {
+                //If it does match, update the password
+                TheAccount.Password = request.NewPassword;
+                await context.SaveChangesAsync();
+                return Ok("Password was successfully updated");
+            }
+            
+           
+        }
+
+
+
 
 
     }
